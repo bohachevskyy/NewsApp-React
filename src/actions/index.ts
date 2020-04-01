@@ -1,6 +1,7 @@
-import { ActionTypes } from "./types"
+import { ActionTypes } from './types'
 import { Dispatch } from 'redux'
 import axios from 'axios'
+
 const url = 'https://newsapi.org/v2/top-headlines'
 
 export interface NewsObject {
@@ -10,6 +11,7 @@ export interface NewsObject {
     urlToImage: string;
     publishedAt: string;
     content: string;
+    author: string;
 }
 
 export interface FetchNewsAction {
@@ -24,12 +26,12 @@ export interface SelectNewAction {
 
 export const fetchNews = () => {
     return async (dispatch: Dispatch) => {
-        const response = await axios.get<NewsObject[]>(url, {
-            params: { apiKey: process.env.REACT_APP_NEWS_KEY, country: "us" }
+        const response = await axios.get(url, {
+            params: { apiKey: process.env.REACT_APP_NEWS_KEY, country: 'us' }
         });
         dispatch<FetchNewsAction>({
             type: ActionTypes.fetchNews,
-            payload: response.data
+            payload: response.data.articles
         })
     }
 }

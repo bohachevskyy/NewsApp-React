@@ -1,5 +1,5 @@
 import { NewsObject } from '../actions/index';
-import { ActionTypes, Action } from "../actions/types";
+import { ActionTypes, Action } from '../actions/types';
 
 export interface NewsState {
     news: NewsObject[];

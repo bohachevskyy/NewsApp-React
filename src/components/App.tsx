@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { fetchNews, NewsObject } from "../actions"
-import { StoreState } from "../reducers"
+import { fetchNews, NewsObject } from '../actions'
+import { News } from './News';
+import { NewsDetails } from './NewsDetail';
 
 interface AppProps {
-    news: NewsObject[];
     fetchNews: Function;
 }
 
@@ -14,19 +14,38 @@ class _App extends React.Component<AppProps> {
     }
 
     render() {
+
         return (
-            <div>
-                Hello from hell!
+            <div className='card w-100%'>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div
+                        className='overflow-auto'
+                        style={{
+                            display: 'flex',
+                            flex: 1,
+                            flexDirection: 'column'
+                        }}>
+                        <div className='overflow-auto' style={{ height: '100vh' }}>
+                            <News />
+                        </div>
+                    </div>
+
+                    <div
+                        style={{
+                            display: 'block',
+                            flex: 3,
+                            flexDirection: 'column',
+                            height: 'inherit'
+                        }}>
+                        <NewsDetails />
+                    </div>
+                </div>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state: StoreState): { news: NewsObject[] } => {
-    return { news: state.news.news }
-}
-
 export const App = connect(
-    mapStateToProps,
+    null,
     { fetchNews }
 )(_App)
